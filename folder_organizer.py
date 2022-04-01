@@ -1,8 +1,5 @@
 from pathlib import Path
-import string
 import shutil
-
-alphabets=list(string.ascii_uppercase)
 
 class FolderDoesNotExistError(Exception):
     def __init__(self, message) :
@@ -39,10 +36,10 @@ class Arrange_files(Folder_check):
         file names as list of values """
 
         file_list=self.get_file_list()
-        file_dict= dict.fromkeys(alphabets)
+        file_dict= dict.fromkeys([file[0].upper() for file in file_list if not file[0].isnumeric()])
         for i in file_dict:
             file_dict[i]=[j for j in file_list if j.startswith(i) or j.upper().startswith(i)]
-        return {key:val for key,val in file_dict.items() if len(val)!=0}
+        return file_dict
 
 
 class Move_files ( Arrange_files):
@@ -64,7 +61,7 @@ class Move_files ( Arrange_files):
                 shutil.move(rf'{src_folder/j}',rf'{destination_folder}')
             
        
-c=Move_files(folder=r'C:\Users\user\Pictures\Screenshots')
+c=Move_files(folder=r'C:\Users\user\Desktop\array2')
 c.move_files()
 
 
