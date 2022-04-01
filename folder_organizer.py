@@ -38,7 +38,7 @@ class Arrange_files(Folder_check):
         file_list=self.get_file_list()
         file_dict= dict.fromkeys([[k for k in file.upper() if  k.isalpha()][0] for file in file_list])
         for i in file_dict:
-            file_dict[i]=[j for j in file_list if j.startswith(i) or i==[k for k in j.upper() if k.isalpha()][0] ]
+            file_dict[i]=[j for j in file_list if  i==[k for k in j.upper() if k.isalpha()][0] ]
             
         return file_dict
 
@@ -62,7 +62,7 @@ class Move_files ( Arrange_files):
                 shutil.move(rf'{src_folder/j}',rf'{destination_folder}')
             
        
-c=Move_files(folder=r'C:\Users\user\Downloads')
+c=Move_files(folder=r'your folder path')
 c.move_files()
 
 
